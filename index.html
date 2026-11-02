@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estefanía Viyella</title>
+  <meta name="description" content="Estefanía Viyella, artista visual. Pintura figurativa. Pontevedra, Galicia.">
+  <meta property="og:title" content="Estefanía Viyella">
+  <meta property="og:description" content="Artista visual. Pintura figurativa.">
+  <meta property="og:image" content="img/figura-gris.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400&family=Familjen+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="nombre" href="#" data-home>Estefanía Viyella</a>
+
+  <!-- Escritorio: visor, ficha y CV -->
+  <main class="escritorio" aria-live="polite">
+    <figure class="visor">
+      <div class="visor-imagen"></div>
+      <div class="flechas" hidden>
+        <button type="button" class="anterior" aria-label="Imagen anterior">←</button>
+        <button type="button" class="siguiente" aria-label="Imagen siguiente">→</button>
+      </div>
+    </figure>
+    <p class="ficha"></p>
+    <section class="cv-escritorio" hidden></section>
+  </main>
+
+  <!-- Índice lateral (escritorio) -->
+  <aside class="indice" aria-label="Obras seleccionadas">
+    <button type="button" class="indice-flecha" aria-label="Abrir índice">←</button>
+    <p class="indice-titulo">Obras seleccionadas</p>
+    <div class="indice-lista">
+      <div class="cabecera"><span>Título</span><span>Año</span></div>
+      <ul class="filas"></ul>
+      <ul class="filas extra"></ul>
+    </div>
+    <nav class="redes"></nav>
+  </aside>
+
+  <!-- Móvil: página única -->
+  <div class="movil">
+    <div class="feed"></div>
+    <div class="menu-movil" aria-label="Obras seleccionadas">
+      <button type="button" class="menu-cabecera">
+        <span>Obras seleccionadas</span><span class="menu-flecha">↑</span>
+      </button>
+      <div class="menu-lista">
+        <div class="cabecera"><span>Título</span><span>Año</span></div>
+        <ul class="filas"></ul>
+        <ul class="filas extra"></ul>
+        <nav class="redes"></nav>
+      </div>
+    </div>
+    <div class="menu-fuera" hidden></div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
