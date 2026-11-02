@@ -185,6 +185,11 @@ indice.addEventListener('click', e => {
   if (!indice.classList.contains('abierto') && !e.target.closest('.redes a')) { e.preventDefault(); abrirIndice(true); }
 });
 $('.indice-flecha').addEventListener('click', e => { e.stopPropagation(); abrirIndice(!indice.classList.contains('abierto')); });
+// Con ratón, el índice se abre al pasar por encima y se cierra al salir
+if (matchMedia('(hover: hover)').matches) {
+  indice.addEventListener('mouseenter', () => abrirIndice(true));
+  indice.addEventListener('mouseleave', () => abrirIndice(false));
+}
 indice.querySelectorAll('.filas').forEach(ul => {
   ul.addEventListener('click', e => {
     const li = e.target.closest('li'); if (!li || !indice.classList.contains('abierto')) return;
