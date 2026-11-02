@@ -266,6 +266,41 @@ document.querySelector('.movil').addEventListener('click', e => {
   e.preventDefault(); abrirMenu(false); irA(id);
 });
 
+// ───────── Imagen ampliada (clic en escritorio, tap en móvil) ─────────
+const zoom = $('.zoom'), zoomImg = $('.zoom img');
+let zoomLista = [], zoomI = 0, zoomAlt = '';
+function abrirZoom(lista, i, alt) {
+  zoomLista = lista; zoomI = i; zoomAlt = alt;
+  $('.zoom-flechas').hidden = lista.length < 2;
+  pintarZoom(); zoom.hidden = false; $('.zoom-cerrar').focus();
+}
+function pintarZoom() { zoomImg.src = 'img/' + zoomLista[zoomI]; zoomImg.alt = zoomAlt; }
+const moverZoom = d => { zoomI = (zoomI + d + zoomLista.length) % zoomLista.length; pintarZoom(); };
+const cerrarZoom = () => { zoom.hidden = true; };
+zoom.addEventListener('click', e => {
+  if (e.target.closest('.anterior')) return moverZoom(-1);
+  if (e.target.closest('.siguiente')) return moverZoom(1);
+  cerrarZoom();
+});
+document.addEventListener('keydown', e => {
+  if (zoom.hidden) return;
+  if (e.key === 'Escape') cerrarZoom();
+  if (e.key === 'ArrowLeft' && zoomLista.length > 1) moverZoom(-1);
+  if (e.key === 'ArrowRight' && zoomLista.length > 1) moverZoom(1);
+});
+visorImagen.addEventListener('click', e => {
+  if (e.target.tagName !== 'IMG') return;
+  if (mostrada === 'acerca') return abrirZoom([ACERCA.foto], 0, 'Estefanía Viyella');
+  const o = obra(mostrada); abrirZoom(o.imagenes.map(([s]) => s), imagen, o.titulo);
+});
+feed.addEventListener('click', e => {
+  const img = e.target.closest('.caja img.activa, .entrada img.foto'); if (!img) return;
+  const o = obra(img.closest('.entrada').id.slice(2));
+  if (!o) return abrirZoom([ACERCA.foto], 0, 'Estefanía Viyella');
+  const lista = o.imagenes.map(([s]) => s);
+  abrirZoom(lista, lista.indexOf(img.getAttribute('src').slice(4)), o.titulo);
+});
+
 // Nombre → inicio
 $('[data-home]').addEventListener('click', e => {
   e.preventDefault();
